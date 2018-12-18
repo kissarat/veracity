@@ -1,0 +1,28 @@
+{
+  "name": "veracity",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kissarat/veracity.git"
+  },
+  "keywords": [
+    "validation",
+    "declarative"
+  ],
+  "author": "Taras Labiak <kissarat@gmail.com>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/kissarat/veracity/issues"
+  },
+  "homepage": "https://github.com/kissarat/veracity#readme",
+  "dependencies": {
+    "jsonschema": "^1.2.4",
+    "lodash": "^4.17.11",
+    "validator": "^10.9.0"
+  }
+}
