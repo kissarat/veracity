@@ -81,8 +81,7 @@ ssl
 .idea
 .vscode
 nbproject
-public/lib
-
+package-lock.json
 
 ############################
 # Node.js
