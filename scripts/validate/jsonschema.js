@@ -21,4 +21,9 @@ async function main(options,
   }));
 }
 
-void main(...getOptions());
+if (module.parent) {
+  module.exports = main
+}
+else {
+  void main(...getOptions());
+}
