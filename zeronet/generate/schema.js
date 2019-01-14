@@ -3,6 +3,10 @@ const A = require("auxiliary/utilities");
 async function main(options) {
     const sqliteSchema = await A.read.json();
     const schema = {
+        // $id: "http://labiak.org/zeronet/dbschema.schema.json",
+        // title: sqliteSchema.dbname,
+        $schema: "http://json-schema.org/draft-04/schema#",
+        type: "object",
         definitions: {}
     }
     for(const [tableName, table] of Object.entries(sqliteSchema.tables)) {
