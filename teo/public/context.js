@@ -110,4 +110,6 @@ function repeat(number, func) {
     }
 }
 
+function fi
+
 const array = a => [...a];
