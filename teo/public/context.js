@@ -1,6 +1,8 @@
+const LastNumber = 1000000;
+
 const add = (i = 1) => (j = -1) => i + j;
-const less = (i = Number.MAX_SAFE_INTEGER) => j => j < i;
-const more = (i = Number.MAX_SAFE_INTEGER) => j => j > i;
+const less = (i = LastNumber) => j => j < i;
+const more = (i = LastNumber) => j => j > i;
 const sub = (i = 0) => j => i - j
 
 function* generate(is = less(), next = add()) {
@@ -9,7 +11,7 @@ function* generate(is = less(), next = add()) {
     }
 }
 
-function* range(max = Number.MAX_SAFE_INTEGER, i = 0) {
+function* range(max = LastNumber, i = 0) {
     for(; i < max; i++) {
         yield i;
     }
@@ -66,6 +68,46 @@ function* disjunction(first, second, equals = simpleEquals) {
             yield item;
         }
     }   
+}
+
+function count(source) {
+    let i = 0;
+    for(const item of source) {
+        i++;
+    }
+    return i;
+}
+
+function first(source, is) {
+    for(const item of source) {
+        if (is(item)) {
+            return item;
+        }
+    }
+}
+
+function* page(source, offset = 0, limit = 10) {
+    let i = 0;
+    for(const item of source) {
+        if (i >= offset) {
+            if (i < limit) {
+                break;
+            }
+            yield item;
+        }
+    }
+}
+
+function measure(func) {
+    const start = performance.now();
+    func();
+    return performance.now() - start;
+}
+
+function repeat(number, func) {
+    for(const i of range(number)) {
+        func(i);
+    }
 }
 
 const array = a => [...a];
