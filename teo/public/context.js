@@ -1,4 +1,4 @@
-const LastNumber = 1000000;
+const LastNumber = 1 << 30;
 
 const add = (i = 1) => (j = -1) => i + j;
 const less = (i = LastNumber) => j => j < i;
