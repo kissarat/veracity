@@ -110,6 +110,21 @@ function repeat(number, func) {
     }
 }
 
-function fi
+const baseBy = (base = 10) => number => number.toString(base);
+const itemOf = array => i => array[i];
+const splitBy = string => sep => string.split(sep);
+
+function fibonacci(n, ...mappers) {
+    const { cache } = fibonacci;
+    const { length } = cache;
+    if (n >= length) {
+        for(let i = length; i <= n; i++) {
+            cache.push(cache[i - 1] + cache[i - 2]);            
+        }
+    }
+    return map(range(n), itemOf(cache), ...mappers);
+}
+
+fibonacci.cache = [1, 1];
 
 const array = a => [...a];
