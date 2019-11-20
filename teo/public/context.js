@@ -127,4 +127,12 @@ function fibonacci(n, ...mappers) {
 
 fibonacci.cache = [1, 1];
 
+function print(generator) {
+    for(const item of generator) {
+        console.log(item);
+    }
+}
+
+const getAt = offset => source => page(source, offset, offset + 1);
+
 const array = a => [...a];
