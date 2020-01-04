@@ -1,7 +1,7 @@
-const { isObject, merge } = require('auxiliary');
+const { isObject, merge, pick } = require('auxiliary');
 
 module.exports = options => ({
-    createRouter: options.createRouter,
+    ...options,
     routes: options.routes.map(route => {
         let emptyDefaultRoute;
         if (isObject(options.defaultRoute)) {
@@ -10,27 +10,21 @@ module.exports = options => ({
             emptyDefaultRoute = {};
         }
         const normalized = merge(emptyDefaultRoute, route);
-        const policies = normalized.policies;
-        if (Array.isArray(policies)) {
-            normalized.policies = {};
-            policies.forEach(policy => {
-                normalized.policies[policy] = {};
-            });
-        }
+        normalized.policies = (normalized.policies || []).map(policy => typeof policy === 'string' ? { policy } : policy);
         if (typeof normalized.method === 'string') {
             normalized.method = [normalized.method];
         }
         const handler = typeof normalized.handler === 'function'
             ? normalized.handler.name
             : normalized.handler
-        normalized.operationId = options.handlerPrefix
+        normalized.operationId = options.controllerName
             ? `${options.handlerPrefix}.${handler}`
             : handler
         if (!normalized.parameters) {
             normalized.parameters = [];
         }
         const params = [];
-        normalized.path = normalized.path.replace(/:(\w+)/g, (s, name) => {
+        normalized.pathname = normalized.path.replace(/:(\w+)/g, (s, name) => {
             params.push(name);
             return `{${name}}`;
         });

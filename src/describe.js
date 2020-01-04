@@ -9,10 +9,10 @@ module.exports = function describe(options) {
     })
     Object.keys(routes).forEach(pathname => {
         options.routes
-            .filter(r => r.path === pathname)
+            .filter(r => r.pathname === pathname)
             .forEach(route => {
                 route.method.forEach(method => {
-                    routes[route.path][method.toLowerCase()] = {
+                    routes[route.pathname][method.toLowerCase()] = {
                         operationId: route.operationId,
                         ...pick('summary', 'parameters', 'response')
                     }
