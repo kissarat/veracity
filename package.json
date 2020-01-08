@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/kissarat/veracity#readme",
   "dependencies": {
-    "auxiliary": "^0.1.4",
-    "codecov": "^3.6.1"
+    "auxiliary": "^0.1.4"
   },
   "devDependencies": {
+    "codecov": "^3.6.1",
     "mocha": "^6.2.2",
     "nyc": "^15.0.0"
   },
