@@ -1,5 +1,8 @@
-const { isObject, merge, pick } = require('auxiliary');
+const { isObject, merge } = require('auxiliary');
 
+/**
+ * Normalize router description
+ */
 module.exports = options => ({
     ...options,
     routes: options.routes.map(route => {

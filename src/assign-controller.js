@@ -5,7 +5,7 @@ module.exports = function assignController(options, controller) {
             const handlerName = route.operationId.split('.')[1];
             return {
                 ...route,
-                [handlerName]: controller[handlerName]
+                handler: controller[handlerName]
             }
         })
     }
