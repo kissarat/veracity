@@ -1,15 +1,16 @@
 const { equal, ok } = require('assert');
-const { isObject } = require('auxiliary');
 const describeSchema = require('../src/describe');
 
 const routes = [
     {
         method: ['GET', 'POST'],
-        path: '/users'
+        path: '/users',
+        operationId: 'one'
     },
     {
         method: ['PUT'],
-        path: '/users'
+        path: '/users',
+        operationId: 'two'
     }
 ];
 
@@ -43,6 +44,23 @@ describe('describe', () => {
             }),
             route => {
                 equal(typeof route.summary, 'string');
+            }
+        );
+    });
+
+    it('operationId', () => {
+        const controllerName = 'd562d197-f95d-4ebf-b78b-1c2ee0b3ca59';
+        eachSchema(
+            describeSchema({
+                routes: routes.map(r => ({
+                    ...r,
+                    operationId: `${controllerName}.${r.operationId}`,
+                    ...description
+                }))
+            }),
+            route => {
+                equal(typeof route.operationId, 'string');
+                ok(route.operationId.indexOf(`${controllerName}.`) === 0);
             }
         );
     });

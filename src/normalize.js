@@ -18,7 +18,7 @@ module.exports = options => Object.assign({}, options, {
         }
         const handler = typeof normalized.handler === 'function'
             ? normalized.handler.name
-            : normalized.handler
+            : (normalized.operationId || normalized.handler)
         normalized.operationId = options.controllerName
             ? `${options.handlerPrefix}.${handler}`
             : handler

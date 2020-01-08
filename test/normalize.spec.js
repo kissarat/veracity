@@ -1,4 +1,4 @@
-const { ok, equal } = require('assert');
+const { ok } = require('assert');
 const { isObject } = require('auxiliary');
 const normalize = require('../src/normalize');
 
