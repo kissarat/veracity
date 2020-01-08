@@ -7,15 +7,20 @@ describe('describe', () => {
         equal(typeof schema, 'object');
     });
 
-    // it('get', () => {
-    //     Object.keys(schema).forEach(prefix => {
-    //         const routes = schema[prefix];
-    //         Object.keys(routes).forEach(method => {
-    //             const route = routes[method];
-    //             assert(isObject(route));
-    //             equal(Array.isArray(route.method));
-    //             equal(route.method.every(method => ['GET'].includes(method)));
-    //         });
-    //     });
-    // })
+    it('get', () => {
+        const schema = describeSchema({
+            routes: [{
+                method: ['GET']
+            }]
+        });
+        Object.keys(schema).forEach(prefix => {
+            const routes = schema[prefix];
+            Object.keys(routes).forEach(method => {
+                const route = routes[method];
+                assert(isObject(route));
+                equal(Array.isArray(route.method));
+                equal(route.method.every(method => ['GET'].includes(method)));
+            });
+        });
+    })
 });
