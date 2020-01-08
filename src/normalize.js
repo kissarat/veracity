@@ -43,6 +43,7 @@ module.exports = options => Object.assign({}, options, {
                         }
                     });
             }
-        })
+        });
+        return normalized;
     })
 })
