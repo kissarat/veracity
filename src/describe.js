@@ -16,4 +16,5 @@ module.exports = function describe(options = { routes: [] }) {
                 })
             });
     });
+    return routes;
 }
