@@ -10,6 +10,7 @@
 .Spotlight-V100
 .tmp
 .Trashes
+.travis.yml
 .vscode
 *.7z
 *.cab
