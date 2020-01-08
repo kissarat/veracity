@@ -1,6 +1,6 @@
 const { pick } = require('auxiliary');
 
-module.exports = function describe(options) {
+module.exports = function describe(options = { routes: [] }) {
     const routes = {};
     options.routes.forEach(route => {
         if (!routes[route.path]) {
