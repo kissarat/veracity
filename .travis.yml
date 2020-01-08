@@ -1,4 +1,9 @@
-os: windows, macos
+os:
+  - windows
+  - osx
+jobs:
+  allow_failures:
+    - os: windows
 language: node_js
 node_js:
   - 10
