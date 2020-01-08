@@ -3,8 +3,7 @@ const { isObject, merge } = require('auxiliary');
 /**
  * Normalize router description
  */
-module.exports = options => ({
-    ...options,
+module.exports = options => Object.assign({}, options, {
     routes: options.routes.map(route => {
         let emptyDefaultRoute;
         if (isObject(options.defaultRoute)) {

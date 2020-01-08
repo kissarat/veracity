@@ -12,10 +12,7 @@ module.exports = function describe(options) {
             .filter(r => r.pathname === pathname)
             .forEach(route => {
                 route.method.forEach(method => {
-                    routes[route.pathname][method.toLowerCase()] = {
-                        operationId: route.operationId,
-                        ...pick('summary', 'parameters', 'response')
-                    }
+                    routes[route.pathname][method.toLowerCase()] = pick(route, 'operationId', 'summary', 'parameters', 'response');
                 })
             });
     });

@@ -24,7 +24,7 @@
     "auxiliary": "^0.1.4"
   },
   "devDependencies": {
-    "mocha": "^7.0.0"
+    "mocha": "^6.2.2"
   },
   "description": ""
 }
