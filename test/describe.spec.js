@@ -1,4 +1,5 @@
-const { equal } = require('assert');
+const { equal, ok } = require('assert');
+const { isObject } = require('auxiliary');
 const describeSchema = require('../src/describe');
 
 describe('describe', () => {
@@ -7,19 +8,24 @@ describe('describe', () => {
         equal(typeof schema, 'object');
     });
 
-    it('get', () => {
+    it('simple', () => {
         const schema = describeSchema({
-            routes: [{
-                method: ['GET']
-            }]
+            routes: [
+                {
+                    method: ['GET', 'POST'],
+                    path: '/users'
+                },
+                {
+                    method: ['PUT'],
+                    path: '/users'
+                }
+            ]
         });
         Object.keys(schema).forEach(prefix => {
             const routes = schema[prefix];
             Object.keys(routes).forEach(method => {
                 const route = routes[method];
-                assert(isObject(route));
-                equal(Array.isArray(route.method));
-                equal(route.method.every(method => ['GET'].includes(method)));
+                ok(isObject(route));
             });
         });
     })
