@@ -5,5 +5,7 @@ jobs:
   allow_failures:
     - os: windows
 language: node_js
+script:
+  npm run report-coverage
 node_js:
   - 10
