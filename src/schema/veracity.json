@@ -1,0 +1,18 @@
+{
+    "type": "object",
+    "required": ["name", "identifier"],
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        }
+    }
+}

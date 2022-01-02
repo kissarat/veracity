@@ -1,0 +1,6 @@
+{
+    "$schema": "./src/schema/veracity.json",
+    "name": "veracity",
+    "identity": "fa7b5dc6-c7ec-4342-86e6-7daa91cd0088",
+    "schema": { "$include": "./src/schema/veracity" }
+}
