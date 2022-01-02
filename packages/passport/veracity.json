@@ -1,0 +1,5 @@
+{
+    "$schema": "../../src/schema/veracity.json",
+    "name": "passport",
+    "identity": "0763d68e-eb2c-4893-995a-8b5658ceebdb"
+}

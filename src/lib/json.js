@@ -4,8 +4,10 @@ const { visit } = require("./deep")
 
 const pretty = (object) => JSON.stringify(object, null, '  ')
 
+const getObjectFilename = path => `${path}.json`
+
 function include(path) {
-    const str = readFileSync(`${path}.json`, { encoding: 'utf-8'})
+    const str = readFileSync(getObjectFilename(path), { encoding: 'utf-8'})
     const root = JSON.parse(str)
     visit(root, (obj, keys, parent) => {
         if (obj.$include) {
@@ -16,6 +18,7 @@ function include(path) {
 }
 
 module.exports = {
+    getObjectFilename,
+    include,
     pretty,
-    include
 }

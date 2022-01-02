@@ -47,6 +47,7 @@
 *.zip
 *#
 *~
+/data
 $RECYCLE.BIN/
 coverage
 coverage.lcov

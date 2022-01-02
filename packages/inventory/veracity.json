@@ -1,0 +1,5 @@
+{
+    "$schema": "../../src/schema/veracity.json",
+    "name": "inventory",
+    "identity": "8c8d1c25-8094-41cd-8758-9f6a94ea7544"
+}

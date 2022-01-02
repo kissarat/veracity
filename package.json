@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kissarat/veracity#readme",
   "dependencies": {
+    "jsonpatch": "^3.0.1",
     "rambda": "^7.0.1"
   }
 }
