@@ -1,4 +1,4 @@
-const { entrypoint } = require('./core')
+const { entrypoint } = require('../lib/core')
 
 function main() {
     return this.getState()

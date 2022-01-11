@@ -2,7 +2,7 @@
   "name": "veracity",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/tools/invoke",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kissarat/veracity#readme",
   "dependencies": {
+    "ajv": "^8.8.2",
     "jsonpatch": "^3.0.1",
     "rambda": "^7.0.1",
     "uuid": "^8.3.2"

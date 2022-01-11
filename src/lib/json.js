@@ -1,18 +1,24 @@
 const { last } = require("rambda")
+const { normalize, join } = require('path')
 const { visit, deepGet, deepKey } = require("./deep")
-const { getResource } = require("./resource")
+const { getResource, getPath, resolvePath } = require("./resource")
+
+const JsonSchemaFilename = resolvePath('@node_modules/ajv/lib/refs/json-schema-2020-12/schema')
 
 const pretty = (object) => JSON.stringify(object, null, '  ')
 
-function include(path) {
+const createJSONLoader = (getSchemaPath) => (path) => {
     const root = getResource(path)
     visit(root, (obj, keys, parent) => {
-        if (obj.$include) {
-            parent[last(keys)] = include(obj.$include)
+        const externalPath = getSchemaPath(obj, keys, parent)
+        if (externalPath) {
+            parent[last(keys)] = include(externalPath)
         }
     })
     return root
 }
+
+const include = createJSONLoader(obj => obj.$include)
 
 function referenceGet(path, defs) {
     const keys = deepKey(path.slice(2))
@@ -39,4 +45,5 @@ function schemaAssign(obj, schema, defs = {}) {
 module.exports = {
     include,
     pretty,
+    JsonSchemaFilename
 }

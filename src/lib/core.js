@@ -32,10 +32,10 @@ function processProgramResult(result) {
           : JSON.stringify(result, null, '  ')
       )
     } else if ('undefined' !== typeof result) {
-      if (isBoolean(result)) {
+      if ('boolean' === typeof result) {
         process.exit(result ? 0 : 1)
       } else {
-        console.log(stringifyPrimitive(result))
+        console.log(result)
       }
     }
   }
@@ -64,7 +64,7 @@ function entrypoint(module, name) {
             continue
         }
         let value = options[param]
-        if (isBoolean(value)) {
+        if ('boolean' === typeof value) {
             value = value ? '1' : '0'
         }
         set(name, value)

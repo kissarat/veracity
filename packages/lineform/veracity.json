@@ -1,0 +1,5 @@
+{
+    "$schema": "../../src/schema/veracity.json",
+    "name": "lineform",
+    "identity": "be37af5a-ac05-4e2f-96ce-0b987def05fa"
+}
