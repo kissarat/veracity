@@ -1,8 +1,4 @@
-const { pick } = require('rambda')
-
-function getState(obj, keys = Object.keys(obj)) {
-    return pick(keys, obj)
-}
+const { deepAssign, deepClone, deepGet, deepSet } = require('./deep')
 
 class Configuration {
     constructor(options) {
@@ -13,13 +9,34 @@ class Configuration {
         }
     }
 
-    setState(state) {
-        Object.assign(this, state)
+    get(path) {
+        return deepGet(this, path)
     }
 
-    getState(keys = Object.keys(this)) {
-        return getState(this, keys)
+    // TODO: make more advanced set
+    set(path, value) {
+        return deepSet(this, path, value)
+    }
+
+    setState(state) {
+        deepAssign(this, state)
+    }
+
+    getState() {
+        return deepClone(this)
     }
 }
 
-module.exports = { Configuration, getState }
+const configurations = {
+    main: new Configuration()
+}
+
+/**
+ * @param {string} name 
+ * @return {Configuration}
+ */
+function getConfig(name = 'main') {
+    return configurations[name]
+}
+
+module.exports = { Configuration, getConfig }

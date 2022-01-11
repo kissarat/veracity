@@ -1,0 +1,16 @@
+{
+    "data": {
+        "users": {
+            "8b1e9d0a-5f9c-4a63-8b9d-b18b7550b42c": {
+                "name": "kissarat@gmail.com",
+                "password": "6566170f1411af098e995a9e1c2748f2dc856a5c5cd39afdc54f500e25c12040"
+            }
+        }
+    },
+    "User": {
+        "type": "object",
+        "properties": {
+            
+        }
+    }
+}
