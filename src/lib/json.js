@@ -1,24 +1,42 @@
+const { join, dirname } = require("path")
 const { last } = require("rambda")
-const { normalize, join } = require('path')
 const { visit, deepGet, deepKey } = require("./deep")
-const { getResource, getPath, resolvePath } = require("./resource")
+const { getResource, resolvePath } = require("./resource")
 
-const JsonSchemaFilename = resolvePath('@node_modules/ajv/lib/refs/json-schema-2020-12/schema')
+const JsonSchemaFilename = resolvePath('@node_modules/ajv/lib/refs/json-schema-2019-09/schema')
 
 const pretty = (object) => JSON.stringify(object, null, '  ')
 
-const createJSONLoader = (getSchemaPath) => (path) => {
-    const root = getResource(path)
+function createJSONLoader(getSchemaPath) {
+    function load(path) {
+        const root = getResource(path)
+        visit(root, (obj, keys, parent) => {
+            const externalPath = getSchemaPath(obj, keys, parent)
+            if (externalPath) {
+                parent[last(keys)] = load(externalPath)
+            }
+        })
+        return root
+    }
+    return load
+}
+
+const include = createJSONLoader(obj => obj.$include)
+
+function loadRefs(root, dir) {
     visit(root, (obj, keys, parent) => {
-        const externalPath = getSchemaPath(obj, keys, parent)
-        if (externalPath) {
-            parent[last(keys)] = include(externalPath)
+        if ('string' === typeof obj.$ref && '#' !== obj.$ref[0]) {
+            const ref = obj.$ref.replace(/.json$/, '')
+            const filename = '/' === ref[0]
+                ? ref
+                : join(dir, ref)
+            const sub = include(filename)
+            loadRefs(sub, dirname(filename))
+            parent[last(keys)] = sub
         }
     })
     return root
 }
-
-const include = createJSONLoader(obj => obj.$include)
 
 function referenceGet(path, defs) {
     const keys = deepKey(path.slice(2))
@@ -30,7 +48,7 @@ function schemaAssign(obj, schema, defs = {}) {
         schema = referenceGet(schema.$ref, defs)
     }
     if ('object' === schema.type) {
-        for(const key in schema.propeties) {
+        for (const key in schema.propeties) {
             const property = schema.propeties
             if (property.default) {
                 obj[key] = property.default
@@ -44,6 +62,8 @@ function schemaAssign(obj, schema, defs = {}) {
 
 module.exports = {
     include,
+    JsonSchemaFilename,
+    loadRefs,
     pretty,
-    JsonSchemaFilename
+    schemaAssign,
 }
